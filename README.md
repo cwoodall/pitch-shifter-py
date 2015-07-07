@@ -13,6 +13,8 @@ Input --> Phase Vocoder (Stretch or compress by 2^(n/12)) --> resample by 2^(n/1
 
 # References
 
+1. [Guitar Pitch Shifter][1] by François Grondin
+2. [Phase Vocoder Tutorial][2]
+
 [1]: http://www.guitarpitchshifter.com
-[2]: http://www.eumus.edu.uy/eme/ensenanza/electivas/dsp/presentaciones/PhaseVocoderTutorial.pdf
-[3]: http://iub.edu/~emusic/etext/synthesis/chapter4_pv.shtml
+[2]: http://www.eumus.edu.uy/eme/ensenanza/electivas/dsp/presentaciones/PhaseVocoderTutorial.pdf)
