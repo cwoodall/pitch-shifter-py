@@ -1,6 +1,6 @@
 #!python
 import argparse
-import pylab
+import matplotlib.pyplot as pp
 import numpy as np
 import scipy
 import scipy.interpolate
@@ -89,8 +89,8 @@ def main(args={}):
         final = final * args.blend + (1-args.blend)*source_mono
 
     if args.debug:
-        pylab.plot(final)
-        pylab.show()
+        pp.plot(final)
+        pp.show()
     
     output = scipy.io.wavfile.write(args.out, rate, np.asarray(final, dtype=np.int16))
     
