@@ -7,34 +7,10 @@ import scipy.interpolate
 import scipy.io.wavfile
 import sys
 import logging
+import pitchshifter as ps
 
 log = logging.getLogger("pitch.shifter")
 logging.basicConfig(filename='example.log', filemode='w', level=logging.DEBUG)
-
-
-def stft(x, fs, chunk_size, hop):
-    """
-    SHORT TIME FOURIER TRANSFORM...
-    """
-    w = scipy.hanning(chunk_size)
-    X = scipy.array([scipy.fft(w*x[i:i+chunk_size])
-                     for i in range(0, len(x)-chunk_size, hop)])/np.sqrt(((chunk_size/hop)/2))
-    return X
-
-def istft(X, fs, chunk_size, hop):
-    x = scipy.zeros(len(X) * (hop))
-    w = scipy.hanning(chunk_size)
-    i_p = 0
-    for n, i in enumerate(range(0, len(x)-chunk_size, hop)):
-        x[i:i+chunk_size] += w*scipy.real(scipy.ifft(X[n]))
-    return x
-
-def freq_true(current, prev, hop, fs):
-    # @TODO fix this...
-    return ((np.angle(prev)-np.angle(current))/(hop/float(fs)))
-
-def P2C(radii, angles):
-    return radii * np.exp(1j*angles)
 
 def main(args={}):
     # Try to open the wav file and read it
@@ -48,15 +24,14 @@ def main(args={}):
     LEFT  = 1
     HOP = int((1-args.overlap)*args.chunk_size)
     HOP_OUT = int(HOP*(2**(args.pitch/12.0)))
-    print(HOP)
-    print(HOP_OUT)
+
     audio_samples = source[1].tolist()
     rate = source[0]
     source_mono = np.asarray(
         [sample[RIGHT] for sample in audio_samples], 
         dtype=np.int16)
 
-    res = stft(source_mono, rate, args.chunk_size, HOP)
+    res = ps.stft(source_mono, rate, args.chunk_size, HOP)
 
     # Fix this phase correction bit...
     adjusted = []
@@ -76,9 +51,9 @@ def main(args={}):
 
         phaseCumulative = phaseCumulative + HOP_OUT * trueFreq;
 
-        adjusted.append(np.asarray(np.abs(res[i]) * np.exp(1j * phaseCumulative)))
+        adjusted.append(ps.complex_polarToCartesian(np.abs(res[i]), phaseCumulative))
     
-    merged_together = np.asarray(istft(adjusted, rate, args.chunk_size, HOP_OUT), dtype=np.int16)
+    merged_together = np.asarray(ps.istft(adjusted, rate, args.chunk_size, HOP_OUT), dtype=np.int16)
 
     if args.no_resample:
         final = merged_together
