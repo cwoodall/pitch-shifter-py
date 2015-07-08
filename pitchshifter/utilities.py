@@ -32,3 +32,18 @@ def complex_cartesianToPolar(x):
     results approx. (1.4142, 0.7854)
     """
     return (np.abs(x), np.angle(x))
+
+def stereoToMono(audio_samples):
+    """
+    Takes in an 2d array of stereo samples and returns a mono numpy 
+    array of dtype np.int16.
+    """
+    LEFT = 0
+    RIGHT = 1
+    mono_samples = np.asarray(
+        [(sample[RIGHT] + sample[LEFT])/2 for sample in audio_samples], 
+        dtype=np.int16
+    )
+
+    
+    return mono_samples
