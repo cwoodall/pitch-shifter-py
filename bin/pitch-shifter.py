@@ -27,11 +27,12 @@ def main(args={}):
     audio_samples = source[1].tolist()
     rate = source[0]
     mono_samples = ps.stereoToMono(audio_samples)
-    frames = ps.stft(mono_samples, rate, args.chunk_size, HOP)
+    frames = ps.stft(mono_samples, args.chunk_size, HOP)
     vocoder = ps.PhaseVocoder(HOP, HOP_OUT)
     adjusted = [frame for frame in vocoder.sendFrames(frames)]
 
-    merged_together = np.asarray(ps.istft(adjusted, rate, args.chunk_size, HOP_OUT), dtype=np.int16)
+    merged_together = ps.istft(adjusted, args.chunk_size, HOP_OUT)
+    merged_together = np.asarray(merged_together, dtype=np.int16)
 
     if args.no_resample:
         final = merged_together

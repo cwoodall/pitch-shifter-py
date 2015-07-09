@@ -16,9 +16,6 @@ class PhaseVocoder(object):
         output_hop: Output hop distance/size
         last_phase: numpy array of all of the previous frames phase information.
         phase_accumulator: numpy array of accumulated phases.
-
-    References:
-        -
     """
     
     def __init__(self, ihop, ohop):
