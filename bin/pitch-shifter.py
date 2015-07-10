@@ -32,14 +32,13 @@ def main(args={}):
     adjusted = [frame for frame in vocoder.sendFrames(frames)]
 
     merged_together = ps.istft(adjusted, args.chunk_size, HOP_OUT)
-    merged_together = np.asarray(merged_together, dtype=np.int16)
 
     if args.no_resample:
         final = merged_together
     else:
-        resampler = scipy.interpolate.interp1d(np.arange(0,len(merged_together)), merged_together, kind='linear')
-        final = resampler(np.linspace(0,len(merged_together)-HOP,len(mono_samples)))
-        final = final * args.blend + (1-args.blend)*mono_samples
+        resampled = ps.linear_resample(merged_together, 
+                                       len(mono_samples))
+        final = resampled * args.blend + (1-args.blend) * mono_samples
 
     if args.debug:
         pp.plot(final)
