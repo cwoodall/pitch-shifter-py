@@ -9,7 +9,6 @@ import sys
 import logging
 import pitchshifter as ps
 
-log = logging.getLogger("pitch.shifter")
 logging.basicConfig(filename='example.log', filemode='w', level=logging.DEBUG)
 
 def main(args={}):
