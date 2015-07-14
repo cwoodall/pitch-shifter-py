@@ -1,4 +1,10 @@
 #!python
+##
+# pitch-shifter-cli.py: Pitch Shifter Command Line Tool
+#
+# Author(s): Chris Woodall <chris@cwoodall.com>
+# MIT License (c) 2014
+##
 import argparse
 import matplotlib.pyplot as pp
 import numpy as np
