@@ -1,10 +1,13 @@
 #!python
 ##
 # pitch-shifter-cli.py: Pitch Shifter Command Line Tool
-#
+# 
 # Author(s): Chris Woodall <chris@cwoodall.com>
-# MIT License (c) 2014
+# BSD License 2015 (c) Chris Woodall <chris@cwoodal.com>
 ##
+__AUTHOR__ = "Chris Woodall <chris@cwoodall.com>"
+__VERSION__ = "0.1.0"
+
 import argparse
 import matplotlib.pyplot as pp
 import numpy as np
@@ -15,7 +18,7 @@ import sys
 import logging
 import pitchshifter as ps
 
-logging.basicConfig(filename='example.log', filemode='w', level=logging.DEBUG)
+logging.basicConfig(filename='pitch-shifter-cli.log', filemode='w', level=logging.DEBUG)
 
 def main(args={}):
     # Try to open the wav file and read it
