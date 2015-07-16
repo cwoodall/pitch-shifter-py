@@ -2,6 +2,56 @@
 import utilities
 import numpy as np
 
+def findPeaks(frame):
+    """
+    
+    """
+    peak_indexes = []
+    K = len(frame)
+    for (i, fft_bin) in enumerate(frame):
+        search_indices = [i-2,i+2]
+        if i < 2:
+            search_indices[0] = i-i
+        elif i < (K-2):
+            search_indices[1] = i+(K-i)
+            
+        if all(fft_bin >= comp_bin for comp_bin in frame[search_indices[0]:search_indices[1]]):
+            peak_indexes.append(i)
+            
+    return peak_indexes
+
+def getRegionOfInfluence(peaks):
+    """
+    Args:
+      List of peaks
+
+    Returns:
+      Array of tuples with (roi_start, roi_end) inclusive
+    """
+    roi = []    
+    last_mid_point = 0
+    for i in range(len(peaks)-1):
+        current_mid_point = int((peaks[i+1] - peaks[i])/2.0) + peaks[i]
+        roi.append((last_mid_point, current_mid_point))
+        last_mid_point = int(current_mid_point)+1
+    
+    # Handle last midpoint
+    roi.append((last_mid_point,None))
+    return roi
+        
+        
+class InPlacePhaseVocoder(object):
+    """
+    Implements a variant of the phase vocoder algorithm described in the paper:
+      "NEW PHASE-VOCODER TECHNIQUES FOR PITCH-SHIFTING, HARMONIZING AND OTHER 
+       EXOTIC EFFECTS" by Jean laroche and Mark Dolson
+    """
+
+    def __init__(self):
+        return
+
+    
+
 class PhaseVocoder(object):
     """
     Implements the phase vocoder algorithm.
