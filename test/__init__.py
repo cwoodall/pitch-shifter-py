@@ -3,6 +3,26 @@
 from pitchshifter import *
 import numpy as np
 
+class TestInPlacePhaseVocoder(object):
+    def test_findPeaks_simple(self):
+        res = findPeaks([1,2,3,2,1])
+        
+        assert len(res) == 1
+        assert res[0] == 2
+
+    def test_findPeaks_earlyPeak(self):
+        res = findPeaks(
+            [8,1,2,4,3,2,1,1])
+
+        print(res)
+        assert len(res) == 2
+        assert res[0] == 0
+        assert res[1] == 3
+    
+    def test_getRegionOfInfluence_3peaks(self):
+        res = getRegionOfInfluence([0,8,21])
+        assert res == [(0,4), (5,14), (15, None)]
+        
 class TestUtilities(object):
     def test_complex_polarToCartesian_correctResults(self):
         r = 1.4142     # magnitude
