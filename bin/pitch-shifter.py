@@ -6,7 +6,7 @@
 # BSD License 2015 (c) Chris Woodall <chris@cwoodal.com>
 ##
 __AUTHOR__ = "Chris Woodall <chris@cwoodall.com>"
-__VERSION__ = "0.1.0"
+__VERSION__ = "0.2.0"
 
 import argparse
 import matplotlib.pyplot as pp

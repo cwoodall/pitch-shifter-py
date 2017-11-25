@@ -22,18 +22,33 @@ $ pip install .
 
 On systems where specific versions of `scipy` and `numpy` might be needed, those should be installed seperately (using `conda` or other means)
 
-## Example Usage
+## Usage
 
-The following command will shift the tone up an octave (12 semitones) and blend it so that both have equal volume (.5)
-
-```
-$pitch-shifter.py -s ./samples/sample1.wav -o out.wav -c 4096 -e .9 -p 12 -b .5 && totem out.wav
-```
+The following command will shift the tone up an octave (`12` semitones) and blend it so that both have equal volume (`.5`)
 
 ```
-$ pitch-shifter.py -s ./samples/sample1.wav -o out.wav -c 4096 -e .9 -p -7 -b .8
-$ totem out.wav
+$ pitch-shifter.py -s ./samples/sample1.wav -o out.wav -p 12 -b .5
 ```
+
+This example shifts up a fifth (`7` semitones) and blends it so it is all the new shifted version:
+
+```
+$ pitch-shifter.py -s ./samples/sample1.wav -o out.wav -p 7 -b 1
+```
+
+With some tweaking you can also use this script to slow down and speed up music using the `--no-resample` switch. To
+double the speed shift up and octave (`12`), but don't resample:
+
+```
+$ pitch-shifter.py -s ./samples/sample1.wav -o out.wav -p 12 --no-resample
+```
+
+To speed it up shift down an octave (`-12`), but don't resample:
+
+```
+$ pitch-shifter.py -s ./samples/sample1.wav -o out.wav -p -12 --no-resample
+```
+
 ## Basic Algorithm Flow
 
 ```

@@ -19,14 +19,13 @@ def stft(x, chunk_size, hop, w=None):
     Raises:
       ValueError if window w is not of size chunk_size
     """
-
     if not w:
         w = sp.hanning(chunk_size)
     else:
         if len(w) != chunk_size:
             raise ValueError("window w is not of the correct length {0}.".format(chunk_size))
     X = sp.array([sp.fft(w*x[i:i+chunk_size])
-                     for i in range(0, len(x)-chunk_size, hop)])/np.sqrt(((chunk_size/hop)/2))
+                     for i in range(0, len(x)-chunk_size, hop)])/np.sqrt(((float(chunk_size)/float(hop))/2.0))
     return X
 
 def istft(X, chunk_size, hop, w=None):

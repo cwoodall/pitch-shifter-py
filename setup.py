@@ -11,7 +11,7 @@ config = {
     'url': '',
     'download_url': '',
     'author_email': 'chris@cwoodall.com',
-    'version': '0.0.1',
+    'version': '0.2.0',
     'install_requires': ['numpy', 'scipy', 'matplotlib'],
     'packages': ['pitchshifter'],
     'scripts': ['bin/pitch-shifter.py'],
