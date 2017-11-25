@@ -6,7 +6,7 @@ class PhaseVocoder(object):
     """
     Implements the phase vocoder algorithm.
     
-    Useage:
+    Usage:
         from phaseshifter import PhaseVocoder, stft
         vocoder = PhaseVocoder(HOP, HOP_OUT)
         phase_corrected_frames = [frame for frame in vocoder.sendFrames(frames)]
