@@ -20,6 +20,7 @@ import pitchshifter as ps
 
 logging.basicConfig(filename='pitch-shifter-cli.log', filemode='w', level=logging.DEBUG)
 
+
 def main(args={}):
     # Try to open the wav file and read it
     try:
@@ -33,6 +34,7 @@ def main(args={}):
     HOP_OUT = int(HOP*RESAMPLING_FACTOR)
     
     audio_samples = source[1].tolist()
+
     rate = source[0]
     mono_samples = ps.stereoToMono(audio_samples)
     frames = ps.stft(mono_samples, args.chunk_size, HOP)

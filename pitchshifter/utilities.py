@@ -2,7 +2,10 @@
 
 import numpy as np
 import scipy as sp
+import collections
 
+def scalar_len(a):
+    return len(a) if isinstance(a, collections.Iterable) else 1
 def complex_polarToCartesian(r, theta):
     """
     Convert a polar representaiton of a complex number to a cartesian
@@ -40,10 +43,20 @@ def stereoToMono(audio_samples):
     """
     LEFT = 0
     RIGHT = 1
-    mono_samples = np.asarray(
-        [(sample[RIGHT] + sample[LEFT])/2 for sample in audio_samples], 
-        dtype=np.int16
-    )
+    channels = scalar_len(audio_samples[0])
+    if channels == 1:
+        mono_samples = np.asarray(audio_samples, 
+            dtype=np.int16)
+
+    elif channels == 2:
+        mono_samples = np.asarray(
+            [(sample[RIGHT] + sample[LEFT])/2 for sample in audio_samples], 
+            dtype=np.int16
+        )
+
+    else:
+        raise Exception("Must be mono or stereo")
+
 
     
     return mono_samples
