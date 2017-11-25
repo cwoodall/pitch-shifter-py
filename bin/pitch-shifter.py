@@ -62,8 +62,8 @@ if __name__ == "__main__":
     parser.add_argument('--out', '-o', help='output .wav file', required=True)
     parser.add_argument('--pitch', '-p', help='pitch shift', default=0, type=float)
     parser.add_argument('--blend', '-b', help='blend', default=1, type=float)
-    parser.add_argument('--chunk-size', '-c', help='chunk size', default=512, type=int)
-    parser.add_argument('--overlap', '-e', help='overlap', default=.5, type=float)
+    parser.add_argument('--chunk-size', '-c', help='chunk size', default=4096, type=int)
+    parser.add_argument('--overlap', '-e', help='overlap', default=.9, type=float)
     parser.add_argument('--debug', '-d', help='debug flag', action="store_true")
     parser.add_argument('--no-resample', help='debug flag', action="store_true")  
 

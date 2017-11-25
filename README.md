@@ -1,34 +1,43 @@
-Shifts the pitch of an input wav file...
+# Python Pith Shifter
+> Take an input .wav file and shift the pitch without
+> changing the speed or length of the input file.
 
+## Install
 
-Examples coming
-# Basic Algorithm Flow
+Require: Python 2.7 
+
+```
+$ git clone https://github.com/cwoodall/pitch-shifter-py.git
+$ cd pitch-shifter-py
+$ pip install .
+```
+
+For development `virtualenv` is recommended:
+
+```
+$ virtualenv venv
+$ . ./venv/bin/activate
+$ pip install .
+```
+
+On systems where specific versions of `scipy` and `numpy` might be needed, those should be installed seperately (using `conda` or other means)
+
+## Example Usage
+
+The following command will shift the tone up an octave (12 semitones) and blend it so that both have equal volume (.5)
+
+```
+$pitch-shifter.py -s ./samples/sample1.wav -o out.wav -c 4096 -e .9 -p 12 -b .5 && totem out.wav
+```
+
+```
+$ pitch-shifter.py -s ./samples/sample1.wav -o out.wav -c 4096 -e .9 -p -7 -b .8
+$ totem out.wav
+```
+## Basic Algorithm Flow
 
 ```
 Input --> Phase Vocoder (Stretch or compress by 2^(n/12)) --> resample by 2^(n/12)
-```
-
-# Installing
-
-Uses python2.7. Only tested on Linux (Ubuntu 14.04)
-
-```
-$ python setup.py install
-```
-
-This will install pitch-shifter.py
-
-## Requirements
-
-Please see setup.py and requirements.txt files. No additional requirements need to be satisfied.
-
-# Example Usage
-
-The following command 
-```
-$ export PYTHONPATH=.
-$ python ./bin/pitch-shifter.py -s ./samples/sample1.wav -o out.wav -c 4096 -e .9 -p -7 -b .8
-$ totem out.wav
 ```
 # References
 
