@@ -5,9 +5,6 @@
 # Author(s): Chris Woodall <chris@cwoodall.com>
 # BSD License 2015 (c) Chris Woodall <chris@cwoodal.com>
 ##
-__AUTHOR__ = "Chris Woodall <chris@cwoodall.com>"
-__VERSION__ = "0.2.0"
-
 import argparse
 import matplotlib.pyplot as pp
 import numpy as np
@@ -16,9 +13,9 @@ import scipy.interpolate
 import scipy.io.wavfile
 import sys
 import logging
-import pitchshifter as ps
+from . import *
 
-logging.basicConfig(filename='pitch-shifter-cli.log', filemode='w', level=logging.DEBUG)
+logging.basicConfig(filename='pitchshifter-cli.log', filemode='w', level=logging.DEBUG)
 
 
 def main(args={}):
@@ -36,17 +33,17 @@ def main(args={}):
     audio_samples = source[1].tolist()
 
     rate = source[0]
-    mono_samples = ps.stereoToMono(audio_samples)
-    frames = ps.stft(mono_samples, args.chunk_size, HOP)
-    vocoder = ps.PhaseVocoder(HOP, HOP_OUT)
+    mono_samples = stereoToMono(audio_samples)
+    frames = stft(mono_samples, args.chunk_size, HOP)
+    vocoder = PhaseVocoder(HOP, HOP_OUT)
     adjusted = [frame for frame in vocoder.sendFrames(frames)]
 
-    merged_together = ps.istft(adjusted, args.chunk_size, HOP_OUT)
+    merged_together = istft(adjusted, args.chunk_size, HOP_OUT)
 
     if args.no_resample:
         final = merged_together
     else:
-        resampled = ps.linear_resample(merged_together, 
+        resampled = linear_resample(merged_together, 
                                        len(mono_samples))
         final = resampled * args.blend + (1-args.blend) * mono_samples
 
@@ -57,7 +54,7 @@ def main(args={}):
     output = scipy.io.wavfile.write(args.out, rate, np.asarray(final, dtype=np.int16))
     
 
-if __name__ == "__main__":
+def cli():
     parser = argparse.ArgumentParser(
         description = "Shifts the pitch of an input .wav file")
     parser.add_argument('--source', '-s', help='source .wav file', required=True)
@@ -70,6 +67,7 @@ if __name__ == "__main__":
     parser.add_argument('--no-resample', help='debug flag', action="store_true")  
 
     args = parser.parse_args()
-    
-    print(args)
     main(args)
+
+if __name__ == "__main__":
+    cli()

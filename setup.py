@@ -1,22 +1,30 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+from setuptools import setup, find_packages, Command
+from distutils.util import convert_path
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+main_ns = {}
+ver_path = convert_path('pitchshifter/version.py')
+with open(ver_path) as ver_file:
+    exec(ver_file.read(), main_ns)
 
-config = {
-    'description': '',
-    'author': 'Christopher Woodall',
-    'url': '',
-    'download_url': '',
-    'author_email': 'chris@cwoodall.com',
-    'version': '0.2.0',
-    'install_requires': ['numpy', 'scipy', 'matplotlib'],
-    'packages': ['pitchshifter'],
-    'scripts': ['bin/pitch-shifter.py'],
-    'name': 'pitch-shifter',
-    'test_suite': 'nose.collector'
-}
-
-setup(**config)
+setup(
+    name='pitchshifter',
+    version=main_ns['__VERSION__'],
+    packages=find_packages(),
+    install_requires=[
+        'click',
+        'numpy',
+        'scipy',
+        'matplotlib'
+    ],
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest', 'coverage'],
+    description='Pitchshifting with python',
+    author='Christopher Woodall',
+    author_email='chris@cwoodall.com',
+    zip_safe=False,
+    entry_points={
+        "console_scripts": [
+            "pitchshifter=pitchshifter.pitchshifter:cli",
+        ]},
+)

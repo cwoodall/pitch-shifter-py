@@ -1,10 +1,10 @@
-#!python
+#!/usr/bin/env python
 
 from utilities import *
 from stft import *
 from vocoder import *
 from resampler import *
 import logging
+from version import *
 
-__VERSION__ = "0.1.0"
-log = logging.getLogger("pitch.shifter")
+log = logging.getLogger("pitchshifter")
