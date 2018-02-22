@@ -43,7 +43,7 @@ double the speed shift up and octave (`12`), but don't resample:
 $ pitch-shifter.py -s ./samples/sample1.wav -o out.wav -p 12 --no-resample
 ```
 
-To speed it up shift down an octave (`-12`), but don't resample:
+To half the speed shift down an octave (`-12`), but don't resample:
 
 ```
 $ pitch-shifter.py -s ./samples/sample1.wav -o out.wav -p -12 --no-resample
