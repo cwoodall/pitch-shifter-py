@@ -1,4 +1,4 @@
-# Python Pith Shifter
+# Python Pitch Shifter
 > Take an input .wav file and shift the pitch without
 > changing the speed or length of the input file.
 
