@@ -4,7 +4,7 @@
 
 ## Install
 
-Require: Python 2.7 
+Require: Python 3.7+
 
 ```
 $ git clone https://github.com/cwoodall/pitch-shifter-py.git
@@ -27,26 +27,26 @@ On systems where specific versions of `scipy` and `numpy` might be needed, those
 The following command will shift the tone up an octave (`12` semitones) and blend it so that both have equal volume (`.5`)
 
 ```
-$ pitch-shifter.py -s ./samples/sample1.wav -o out.wav -p 12 -b .5
+$ pitchshifter -s ./samples/sample1.wav -o out.wav -p 12 -b .5
 ```
 
 This example shifts up a fifth (`7` semitones) and blends it so it is all the new shifted version:
 
 ```
-$ pitch-shifter.py -s ./samples/sample1.wav -o out.wav -p 7 -b 1
+$ pitchshifter -s ./samples/sample1.wav -o out.wav -p 7 -b 1
 ```
 
 With some tweaking you can also use this script to slow down and speed up music using the `--no-resample` switch. To
 double the speed shift up and octave (`12`), but don't resample:
 
 ```
-$ pitch-shifter.py -s ./samples/sample1.wav -o out.wav -p 12 --no-resample
+$ pitchshifter -s ./samples/sample1.wav -o out.wav -p 12 --no-resample
 ```
 
 To half the speed shift down an octave (`-12`), but don't resample:
 
 ```
-$ pitch-shifter.py -s ./samples/sample1.wav -o out.wav -p -12 --no-resample
+$ pitchshifter -s ./samples/sample1.wav -o out.wav -p -12 --no-resample
 ```
 
 ## Basic Algorithm Flow

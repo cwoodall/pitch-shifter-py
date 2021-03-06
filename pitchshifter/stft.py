@@ -1,7 +1,9 @@
-#!python
+#!/usr/bin/env python
 
 import numpy as np
-import scipy as sp
+from scipy.fft import fft, ifft
+from scipy.signal import hanning
+from scipy import array, zeros, real
 
 def stft(x, chunk_size, hop, w=None):
     """
@@ -20,11 +22,11 @@ def stft(x, chunk_size, hop, w=None):
       ValueError if window w is not of size chunk_size
     """
     if not w:
-        w = sp.hanning(chunk_size)
+        w = hanning(chunk_size)
     else:
         if len(w) != chunk_size:
             raise ValueError("window w is not of the correct length {0}.".format(chunk_size))
-    X = sp.array([sp.fft(w*x[i:i+chunk_size])
+    X = array([fft(w*x[i:i+chunk_size])
                      for i in range(0, len(x)-chunk_size, hop)])/np.sqrt(((float(chunk_size)/float(hop))/2.0))
     return X
 
@@ -47,13 +49,13 @@ def istft(X, chunk_size, hop, w=None):
     """
 
     if not w:
-        w = sp.hanning(chunk_size)
+        w = hanning(chunk_size)
     else:
         if len(w) != chunk_size:
             raise ValueError("window w is not of the correct length {0}.".format(chunk_size))
 
-    x = sp.zeros(len(X) * (hop))
+    x = zeros(len(X) * (hop))
     i_p = 0
     for n, i in enumerate(range(0, len(x)-chunk_size, hop)):
-        x[i:i+chunk_size] += w*sp.real(sp.ifft(X[n]))
+        x[i:i+chunk_size] += w*real(ifft(X[n]))
     return x

@@ -1,9 +1,9 @@
-#!python
+#!/usr/bin/env python
 ##
 # pitch-shifter-cli.py: Pitch Shifter Command Line Tool
 # 
 # Author(s): Chris Woodall <chris@cwoodall.com>
-# BSD License 2015 (c) Chris Woodall <chris@cwoodal.com>
+# MIT License 2015-2021 (c) Chris Woodall <chris@cwoodall.com>
 ##
 import argparse
 import matplotlib.pyplot as pp
@@ -13,7 +13,11 @@ import scipy.interpolate
 import scipy.io.wavfile
 import sys
 import logging
-from . import *
+
+from .stft import *
+from .vocoder import *
+from .utilities import *
+from .resampler import linear_resample
 
 logging.basicConfig(filename='pitchshifter-cli.log', filemode='w', level=logging.DEBUG)
 

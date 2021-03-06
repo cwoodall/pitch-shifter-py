@@ -1,14 +1,22 @@
-#!python
+#!/usr/bin/env python
 
 import numpy as np
 import scipy as sp
 import collections
 
 def scalar_len(a):
-    return len(a) if isinstance(a, collections.Iterable) else 1
+    """
+
+    Return
+    """
+    if isinstance(a, collections.Iterable):
+        return len(a)
+    else:
+        return 1
+
 def complex_polarToCartesian(r, theta):
     """
-    Convert a polar representaiton of a complex number to a cartesian
+    Convert a polar representation of a complex number to a cartesian
     representation.
 
     Can be used with a numpy array allowing for block conversions
@@ -23,7 +31,7 @@ def complex_polarToCartesian(r, theta):
 
 def complex_cartesianToPolar(x):
     """
-    Convert a cartesian representaiton of a complex number to a polar
+    Convert a cartesian representation of a complex number to a polar
     representation.
 
     Can be used with a numpy array allowing for block conversions

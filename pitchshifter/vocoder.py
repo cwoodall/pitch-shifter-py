@@ -1,5 +1,5 @@
-#!python
-import utilities
+#!/usr/bin/env python
+from .utilities import *
 import numpy as np
 
 class PhaseVocoder(object):
@@ -47,7 +47,7 @@ class PhaseVocoder(object):
         Returns: phase corrected frame
         """
         omega_bins = 2*np.pi*np.arange(len(frame))/len(frame)
-        magnitude, phase = utilities.complex_cartesianToPolar(frame)
+        magnitude, phase = complex_cartesianToPolar(frame)
 
         delta_phase = phase - self.last_phase
         self.last_phase = phase
@@ -59,7 +59,7 @@ class PhaseVocoder(object):
         
         self.phase_accumulator += self.output_hop * true_freq
         
-        return utilities.complex_polarToCartesian(magnitude, self.phase_accumulator)
+        return complex_polarToCartesian(magnitude, self.phase_accumulator)
 
     def sendFrames(self, frames):
         """
