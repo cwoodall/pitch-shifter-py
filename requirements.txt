@@ -1,7 +1,7 @@
 backports.functools-lru-cache==1.4
 cycler==0.10.0
 matplotlib==2.1.0
-numpy==1.13.3
+numpy==1.22.0
 pitch-shifter==0.0.1
 pyparsing==2.2.0
 python-dateutil==2.6.1
