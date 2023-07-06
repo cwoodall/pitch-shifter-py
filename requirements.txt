@@ -6,6 +6,6 @@ pitch-shifter==0.0.1
 pyparsing==2.2.0
 python-dateutil==2.6.1
 pytz==2017.3
-scipy==1.0.0
+scipy==1.10.0
 six==1.11.0
 subprocess32==3.2.7
